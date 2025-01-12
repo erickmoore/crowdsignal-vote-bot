@@ -2,17 +2,19 @@ import puppeteer from "puppeteer";
 
 const browser = await puppeteer.launch({
   headless: true, // set to false to see browser and test if script works
-  args: ["--proxy-server=socks5://127.0.0.1:9050"],
+  //args: ["--proxy-server=socks5://127.0.0.1:9050"],
 });
 
 async function runVotes() {
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 20; i++) {
     const page = await browser.newPage();
-    await page.goto(`https://poll.fm/POLL_ID/`);
+    await page.goto(`https://poll.fm/14875173/`);
     await page.evaluate(() => {
-      document.querySelector("#PDI_answerANSWER_CHOICE").click();
+      document.querySelector("#PDI_answer65995133").click();
       document.querySelector(".pds-vote-button").click();
     });
+    const cookies = await page.cookies();
+    await page.deleteCookie(...cookies);
     await page.close();
   }
 }
