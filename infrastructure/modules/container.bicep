@@ -30,7 +30,7 @@ resource container 'Microsoft.App/containerApps@2024-03-01' = {
           name: 'votebots'
           resources: {
             cpu: 1
-            memory: '1.Gi'
+            memory: '4Gi'
           }
         }
       ]

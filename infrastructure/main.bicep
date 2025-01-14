@@ -1,6 +1,18 @@
 targetScope = 'subscription'
 
+param time string = utcNow()
+param name string = 'votebot'
 param location string = 'eastus'
+param locations array = [
+  'eastus'
+  'eastus2'
+  'westus2'
+  'westcentralus'
+  'northcentralus'
+  'centralus'
+  'southcentralus'
+]
+
 
 
 resource rg 'Microsoft.Resources/resourceGroups@2024-07-01' = {
@@ -12,28 +24,28 @@ module acr 'modules/acr.bicep' = {
   scope: rg
   name: 'acr'
   params: {
-    name: 'acr'
+    name: name
     location: location
   }
 }
 
 module containerEnvironment 'modules/containerapp.bicep' = {
   scope: rg
-  name: 'votebots'
+  name: 'containerEnvironment-${time}'
   params: {
     location: location
-    name: 'votebots'
+    name: name
   }
 }
 
 module container 'modules/container.bicep' = {
   scope: rg
-  name: 'votebots-container'
+  name: 'containers-${time}'
   params: {
     containerEnvironmentId: containerEnvironment.outputs.containerEnvId
     location: location
-    name: 'votebots'
+    name: name
     acrFQDN: acr.outputs.acrFQDN
-    containerImage: 'votebots'
+    containerImage: name
   }
 }
