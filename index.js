@@ -7,10 +7,18 @@ import puppeteer from "puppeteer";
 //maddison: PDI_answer65995132
 //cmaeron v: PDI_answer65995168 PDI_answer65995168
 
+// pdi answer dugan : PDI_answer70414433
+
 const PDI_ANSWER = process.env.PDI_ANSWER;
+const POLL_URL = process.env.POLL_URL;
 
 if (!PDI_ANSWER) {
   console.error("Please provide the PDI_answer value as an environment variable.");
+  process.exit(1);
+}
+
+if (!POLL_URL) {
+  console.error("Please provide the POLL_URL value as an environment variable.");
   process.exit(1);
 }
 
@@ -27,7 +35,7 @@ async function runVotes() {
 
   for (let i = 0; i < 20; i++) {
     const page = await browser.newPage();
-    await page.goto(`https://poll.fm/14875173/`);
+    await page.goto(POLL_URL);
 
     await page.evaluate((answerId) => {
       const element = document.querySelector(`#${answerId}`);

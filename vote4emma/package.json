@@ -1,0 +1,16 @@
+{
+  "name": "vote4emma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/functions/Vote4Emma1.js",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/functions": "^1.2.3",
+    "chrome-aws-lambda": "^10.1.0",
+    "puppeteer-core": "^10.1.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
