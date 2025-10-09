@@ -1,13 +1,6 @@
 import puppeteer from "puppeteer";
 
-//ava: PDI_answer65995131
-//ema: PDI_answer65995133
-//lilly: PDI_answer65995164
-//toula: PDI_answer65995163
-//maddison: PDI_answer65995132
-//cmaeron v: PDI_answer65995168 PDI_answer65995168
-
-// pdi answer dugan : PDI_answer70414433
+//find: PDI_answer65995131
 
 const PDI_ANSWER = process.env.PDI_ANSWER;
 const POLL_URL = process.env.POLL_URL;
@@ -24,7 +17,7 @@ if (!POLL_URL) {
 
 async function runVotes() {
   const browser = await puppeteer.launch({
-    headless: true, // set to false to see browser and test if script works
+    headless: false, // set to false to see browser and test if script works
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -35,6 +28,7 @@ async function runVotes() {
 
   for (let i = 0; i < 20; i++) {
     const page = await browser.newPage();
+    console.log(`Vote ${i + 1}  of 20`);
     await page.goto(POLL_URL);
 
     await page.evaluate((answerId) => {
@@ -51,7 +45,7 @@ async function runVotes() {
     await page.close();
   }
 
-  browser.close();
+ browser.close();
 
 }
 
