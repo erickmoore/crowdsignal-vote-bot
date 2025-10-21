@@ -19,8 +19,8 @@ for APP in $(az containerapp list -g $RG_NAME --query "[].name" -o tsv); do
   
   for REV in $(az containerapp revision list -g "$RG_NAME" -n "$APP" \
                  --query "[?properties.active==\`true\`].name" -o tsv); do
-    az containerapp revision restart -g "$RG_NAME" -n "$APP" \
-      --revision "$REV" # --only-show-errors -o none
+    az containerapp revision restart -g "$RG_NAME" -n "$APP" --revision "$REV" # --only-show-errors -o none
+    # az containerapp revision stop -g "$RG_NAME" -n "$APP" --revision "$REV" # --only-show-errors -o none
   done
 
   echo "✅ $APP updated and restarted"
