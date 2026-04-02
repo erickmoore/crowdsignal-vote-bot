@@ -2,8 +2,8 @@ RG_NAME="rg-docker-app"
 VAR1_NAME="PDI_ANSWER"
 VAR2_NAME="POLL_URL"
 
-VAR1_VALUE="PDI_answer70898341"
-VAR2_VALUE="https://poll.fm/16117952"
+VAR1_VALUE="PDI_answer73632755"
+VAR2_VALUE="https://poll.fm/16816575" 
 
 for APP in $(az containerapp list -g $RG_NAME --query "[].name" -o tsv); do
   echo "Updating environment variables for $APP..."
